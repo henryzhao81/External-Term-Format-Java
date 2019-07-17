@@ -1,5 +1,12 @@
+We are using Riak(https://riak.com/products/) to store cookie sync data in database, to save storage size, data stored in Riak is using Erlang external term format (http://erlang.org/doc/apps/erts/erl_ext_dist.html#id101182) which similar to Protobuf, erlang language provide API to encoding/decoding this format, but for other language, looks lack support for this data format. For other backend service which written in different language like Java, Go etc to access database by using ETF format directly to save disk space, different language support to encoding/decoding is neccessary.
+
+In our case, 2 months of cookie sync data stored in database(Riak) is around 27T, to migrate to use other service written in Java or Go either waiting for 2 months until all data expired is not good choice, this repository is Java Version of Erlang ETF converter.
 
 Erlang external term format encoding/decoding for Java.
+
+For other language support:
+
+GoLang: https://github.corp.openx.com/henry-zhao/uds_http
 
 In Erlang the BIF erlang:term_to_binary/1,2 is used to convert a term into the external format. To convert binary data encoding to a term, the BIF erlang:binary_to_term/1 is used.
 
@@ -7,7 +14,7 @@ Based on description of ETF format: http://erlang.org/doc/apps/erts/erl_ext_dist
 
 To allow other application access those data without using erlang, following are the example of how to encoding and decoding, we are using Riak Java Client for demonstration to store and retrieve data from riak which currently all data are stored in ETF, for riak java client please refer to: https://github.com/basho/riak-java-client
 
-Before start, add some testing data by using uds client, in remote shell:
+Before start, add some testing data by using uds client, in erlang remote shell:
 
 > AdvId = list_to_binary (["adv_","2221"]).
 <<"adv_2221">>
@@ -100,7 +107,3 @@ To Verify, we need using erlang remote shell to check if data really store into 
 Encoding/Decoding works.
 
 All Data stored in Riak is using zlib to compress
-
-For other language:
-
-Go: https://github.corp.openx.com/henry-zhao/uds_http
