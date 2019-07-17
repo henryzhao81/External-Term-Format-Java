@@ -6,7 +6,7 @@ Erlang external term format encoding/decoding for Java.
 
 For other language support:
 
-GoLang: https://github.corp.openx.com/henry-zhao/uds_http
+GoLang Version: https://github.com/henryzhao81/External-Term-Format-Go
 
 In Erlang the BIF erlang:term_to_binary/1,2 is used to convert a term into the external format. To convert binary data encoding to a term, the BIF erlang:binary_to_term/1 is used.
 
