@@ -1,6 +1,6 @@
 We are using Riak(https://riak.com/products/) to store cookie sync data in database, to save storage size, data stored in Riak is using Erlang external term format (http://erlang.org/doc/apps/erts/erl_ext_dist.html#id101182) which similar to Protobuf, erlang language provide API to encoding/decoding this format, but for other language, looks lack support for this data format. For other backend service which written in different language like Java, Go etc to access database by using ETF format directly to save disk space, different language support to encoding/decoding is neccessary.
 
-In our case, 2 months of cookie sync data stored in database(Riak) is around 27T, to migrate to use other service written in Java or Go either waiting for 2 months until all data expired is not good choice, this repository is Java Version of Erlang ETF converter.
+In our case, 2 months of cookie sync data stored in database(Riak) is around 27T with 3 replica spread in 400 hundreds node(server), to migrate to use other service written in Java or Go either waiting for 2 months until all data expired or using other format to store like JSON is not good choice, this repository is Java Version of Erlang ETF converter.
 
 Erlang external term format encoding/decoding for Java.
 
